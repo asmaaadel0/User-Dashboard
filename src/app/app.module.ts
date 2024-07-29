@@ -12,7 +12,6 @@ import { UserListComponent } from './user-list/user-list.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,6 +19,7 @@ import { UserListComponent } from './user-list/user-list.component';
     HeaderComponent,
     MatSlideToggleModule,
     ProgressBarComponent,
+    UserListComponent,
   ],
   providers: [
     provideClientHydration(),
