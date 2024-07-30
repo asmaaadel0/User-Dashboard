@@ -1,7 +1,7 @@
 # User Dashboard Application
 ## 📝 Table of Contents
 
-- [About <a name = "Overview"></a>](#Overview-)
+- [Overview <a name = "Overview"></a>](#Overview-)
 - [Features and Functionality <a name = "Features"></a>](#Features-)
 - [Website Link <a name = "link"></a>](#link-)
 - [Screen Video from the Website <a name = "screen-video"></a>](#screen-video-)
