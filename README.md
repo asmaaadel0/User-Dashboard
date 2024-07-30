@@ -3,6 +3,7 @@
 
 - [About <a name = "Overview"></a>](#Overview-)
 - [Features <a name = "Features"></a>](#Features-)
+- [Website Link <a name = "link"></a>](#link-)
 - [Screen Video from the Website <a name = "screen-video"></a>](#screen-video-)
 - [Project setup <a name = "project-setup"></a>](#project-setup-)
 - [Contributing <a name = "Contributing"></a>](#Contributing-)
@@ -32,6 +33,8 @@ The User Dashboard application is an Angular-based web application that displays
 - src/app/user-detail/user-detail.component.html: Template for the user detail view.
 - src/app/user-detail/user-detail.component.css: Styles for the user detail view.
 
+## Website Link: <a name = "link"></a>
+https://user-dashboard-sigma-one.vercel.app/
 
 ## Screen Video from the Website: <a name = "screen-video"></a>
 
