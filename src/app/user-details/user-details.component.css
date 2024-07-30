@@ -1,0 +1,36 @@
+.user-detail-card {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar-detail {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.mat-card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.mat-card-subtitle {
+  font-size: 16px;
+  color: #757575;
+}
+
+.mat-card-content p {
+  font-size: 16px;
+  color: #757575;
+  margin: 0;
+}
+
+.mat-progress-bar {
+  margin: 20px 0;
+}
