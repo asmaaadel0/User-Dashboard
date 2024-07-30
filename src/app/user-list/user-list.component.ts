@@ -2,11 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
+import { UserService } from '../services/user.service';
+
 export interface User {
   id: number;
   first_name: string;
   last_name: string;
   avatar: string;
+}
+
+export interface UserResponse {
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  data: User[];
+  support: {
+    url: string;
+    text: string;
+  };
 }
 
 @Component({
@@ -19,21 +33,44 @@ export interface User {
 export class UserListComponent implements OnInit {
   users: User[] = [];
   page = 1;
+  totalPages: number | null = null;
+  loading = false;
+  hasMorPages = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {
-    console.log("test");
+  ngOnInit() {
     this.loadUsers();
   }
 
   loadUsers() {
-    console.log(`test: ${this.page}`);
-    this.http.get<{ data: User[] }>(`https://reqres.in/api/users?page=${this.page}`)
-      .subscribe(response => this.users = response.data);
+    if (this.totalPages !== null && this.page > this.totalPages) {
+      console.log('No more pages to load.');
+      return; // Prevent loading more if no pages are left
+    }
+
+    this.loading = true;
+    this.userService.getUsers(this.page).subscribe(
+      response => {
+        this.users = response.data;
+        this.totalPages = response.total_pages;
+        this.loading = false;
+      },
+      error => {
+        console.error('Error fetching users:', error);
+        this.loading = false;
+      }
+    );
   }
 
   loadMore() {
+    this.hasMorPages = false;
+    if (this.totalPages === null || this.page >= this.totalPages) {
+      console.log('No more pages to load.');
+      this.hasMorPages = true;
+      return; // Prevent loading more if no pages are left
+    }
+    
     this.page++;
     this.loadUsers();
   }

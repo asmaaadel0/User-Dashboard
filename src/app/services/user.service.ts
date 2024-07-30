@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../user-list/user-list.component'; // Adjust the path as needed
+import { User } from '../user-list/user-list.component';
+import { UserResponse } from '../user-list/user-list.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(page: number): Observable<{ data: User[] }> {
-    return this.http.get<{ data: User[] }>(`${this.apiUrl}?page=${page}`);
+  getUsers(page: number): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}?page=${page}`);
   }
 
   getUserById(id: number): Observable<User> {
