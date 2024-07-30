@@ -38,6 +38,9 @@ https://user-dashboard-sigma-one.vercel.app/
 
 ## Screen Video from the Website: <a name = "Screen-Video"></a>
 
+https://github.com/user-attachments/assets/a4278b3d-6212-45f9-8be3-5d4f8607f688
+
+
 ## Project Setup <a name = "Project-Setup"></a>
 ### Prerequisites
 - Node.js (v14 or later)
