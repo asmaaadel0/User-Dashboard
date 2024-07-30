@@ -8,5 +8,8 @@
       <p>ID: {{ user.id }}</p>
     </div>
   </mat-list-item>
-  <button mat-raised-button (click)="loadMore()">Load More</button>
+  <div class="pagination-controls">
+    <button *ngIf="page > 1" mat-raised-button (click)="loadPrevious()">Back</button>
+    <button *ngIf="hasMorePages" mat-raised-button (click)="loadMore()">Load More</button>
+  </div>
 </mat-list>

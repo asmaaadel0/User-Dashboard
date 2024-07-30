@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
+import { MatButtonModule } from '@angular/material/button';
 
 export interface User {
   id: number;
@@ -28,14 +28,14 @@ export interface UserResponse {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   standalone: true,
-  imports: [CommonModule, MatListModule],
+  imports: [CommonModule, MatListModule, MatButtonModule],
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
   page = 1;
   totalPages: number | null = null;
   loading = false;
-  hasMorPages = false;
+  hasMorePages = false;
 
   constructor(private userService: UserService) {}
 
@@ -45,8 +45,8 @@ export class UserListComponent implements OnInit {
 
   loadUsers() {
     if (this.totalPages !== null && this.page > this.totalPages) {
-      console.log('No more pages to load.');
-      return; // Prevent loading more if no pages are left
+      this.hasMorePages = false;
+      return;
     }
 
     this.loading = true;
@@ -54,6 +54,7 @@ export class UserListComponent implements OnInit {
       response => {
         this.users = response.data;
         this.totalPages = response.total_pages;
+        this.hasMorePages = this.page < this.totalPages;
         this.loading = false;
       },
       error => {
@@ -64,16 +65,24 @@ export class UserListComponent implements OnInit {
   }
 
   loadMore() {
-    this.hasMorPages = false;
+    this.hasMorePages = false;
     if (this.totalPages === null || this.page >= this.totalPages) {
       console.log('No more pages to load.');
-      this.hasMorPages = true;
+      this.hasMorePages = true;
       return; // Prevent loading more if no pages are left
     }
     
     this.page++;
     this.loadUsers();
   }
+
+  loadPrevious() {
+    if (this.page > 1) {
+      this.page--;
+      this.loadUsers();
+    }
+  }
+  
   viewDetails(userId: number) {
     // Implement navigation to user details page
   }
