@@ -4,8 +4,6 @@ import {
   Output,
   EventEmitter,
   Input,
-  OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
@@ -13,6 +11,7 @@ import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatGridListModule} from '@angular/material/grid-list';
 export interface User {
   id: number;
   first_name: string;
@@ -43,6 +42,7 @@ export interface UserResponse {
     MatButtonModule,
     MatIconModule,
     MatProgressBarModule,
+    MatGridListModule,
   ],
 })
 export class UserListComponent implements OnInit {

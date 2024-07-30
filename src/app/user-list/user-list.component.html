@@ -6,14 +6,19 @@
     (click)="viewDetails(user.id)"
     class="user-item"
   >
-    <img
-      [src]="user.avatar"
-      alt="{{ user.first_name }} {{ user.last_name }}"
-      class="user-avatar"
-    />
-    <div class="user-info">
-      <h4>{{ user.first_name }} {{ user.last_name }}</h4>
-    </div>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>
+        <img
+          [src]="user.avatar"
+          alt="{{ user.first_name }} {{ user.last_name }}"
+          class="user-avatar"
+      /></mat-grid-tile>
+      <mat-grid-tile>
+        <div class="user-info">
+          <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
   </mat-list-item>
   <div class="pagination-controls">
     <button
