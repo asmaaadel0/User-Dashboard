@@ -7,11 +7,23 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css',
+  animations: [
+    trigger('fadeInUp', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('300ms', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ opacity: 0, transform: 'translateY(10px)' })),
+      ]),
+    ]),
+  ],
   standalone: true,
   imports: [MatProgressBarModule, CommonModule, MatCardModule, MatIconModule, MatButtonModule],
 })

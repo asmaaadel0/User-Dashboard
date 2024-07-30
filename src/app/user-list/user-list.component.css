@@ -48,3 +48,16 @@
 .pagination-controls button {
   min-width: 120px;
 }
+.custom-input {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-input:hover {
+  background-color: #e8eaf6;
+}
+
+.custom-input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+  outline: none;
+}

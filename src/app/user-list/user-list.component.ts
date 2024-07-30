@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { CommonModule } from '@angular/common';
 import { switchMap, Subscription, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 export interface User {
   id: number;
@@ -34,6 +35,17 @@ export interface UserResponse {
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
+  animations: [
+    trigger('listAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('300ms', style({ opacity: 1, transform: 'translateY(0)' })),
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ opacity: 0, transform: 'translateY(10px)' })),
+      ]),
+    ]),
+  ],
   standalone: true,
   imports: [
     CommonModule,
@@ -62,12 +74,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeSub = this.route.queryParams
       .pipe(
-        switchMap(params => {
+        switchMap((params) => {
           this.searchTerm = params['search'] || '';
           this.page = Number(params['page']) || 1;
           return this.loadUsers(); // Return the observable
         }),
-        catchError(error => {
+        catchError((error) => {
           console.error('Error loading users:', error);
           return of(); // Return an empty observable in case of error
         })
@@ -101,13 +113,13 @@ export class UserListComponent implements OnInit, OnDestroy {
     }
 
     return this.userService.getUsers(this.page, this.searchTerm).pipe(
-      tap(response => {
+      tap((response) => {
         this.users = response.data;
         this.totalPages = response.total_pages;
         this.hasMorePages = this.page < this.totalPages;
         this.loading = false;
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Error fetching users:', error);
         this.loading = false;
         return of({
