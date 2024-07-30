@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 export interface User {
   id: number;
@@ -28,7 +29,7 @@ export interface UserResponse {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   standalone: true,
-  imports: [CommonModule, MatListModule, MatButtonModule],
+  imports: [CommonModule, MatListModule, MatButtonModule, MatIconModule],
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
@@ -82,7 +83,7 @@ export class UserListComponent implements OnInit {
       this.loadUsers();
     }
   }
-  
+
   viewDetails(userId: number) {
     // Implement navigation to user details page
   }

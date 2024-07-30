@@ -9,7 +9,11 @@
     </div>
   </mat-list-item>
   <div class="pagination-controls">
-    <button *ngIf="page > 1" mat-raised-button (click)="loadPrevious()">Back</button>
-    <button *ngIf="hasMorePages" mat-raised-button (click)="loadMore()">Load More</button>
+    <button *ngIf="page > 1" mat-raised-button (click)="loadPrevious()">
+      <mat-icon>arrow_back</mat-icon> Back
+    </button>
+    <button *ngIf="hasMorePages" mat-raised-button (click)="loadMore()">
+      Load More <mat-icon>arrow_forward</mat-icon>
+    </button>
   </div>
 </mat-list>
