@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user-list/user-list.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { Location } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -19,15 +18,18 @@ import { MatButtonModule } from '@angular/material/button';
 export class UserDetailsComponent implements OnInit {
   user: User | undefined;
   loading = true;
+  page: number = 1;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private location: Location
+    private router: Router
   ) {}
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
+    this.page = Number(this.route.snapshot.queryParamMap.get('page')) || 1;
+
     if (userId) {
       this.userService.getUserById(Number(userId)).subscribe(
         (user: User) => {
@@ -44,6 +46,6 @@ export class UserDetailsComponent implements OnInit {
     }
   }
   goBack() {
-    this.location.back();
+    this.router.navigate(['/users'], { queryParams: { page: this.page } });
   }
 }

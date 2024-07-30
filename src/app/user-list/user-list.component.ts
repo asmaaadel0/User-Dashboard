@@ -1,18 +1,12 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  Input,
-} from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 export interface User {
   id: number;
   first_name: string;
@@ -57,7 +51,8 @@ export class UserListComponent implements OnInit {
 
   @Output() loadingChange = new EventEmitter<boolean>();
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router,
+    private route: ActivatedRoute,) {}
 
   // ngOnChanges(changes: SimpleChanges) {
   //   if (changes["searchTerm"]) {
@@ -67,6 +62,7 @@ export class UserListComponent implements OnInit {
   // }
 
   ngOnInit() {
+    this.page = Number(this.route.snapshot.queryParamMap.get('page')) || 1;
     this.loadUsers();
   }
 
@@ -98,19 +94,27 @@ export class UserListComponent implements OnInit {
       this.hasMorePages = true;
       return;
     }
-
     this.page++;
+    this.updateUrl();
     this.loadUsers();
   }
 
   loadPrevious() {
-    if (this.page > 1) {
-      this.page--;
-      this.loadUsers();
-    }
+    this.page--;
+    this.updateUrl();
+    this.loadUsers();
   }
 
   viewDetails(userId: number) {
-    this.router.navigate(['/users', userId]);
+    this.router.navigate(['/users', userId], {
+      queryParams: { page: this.page },
+    });
+  }
+  updateUrl(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page: this.page },
+      queryParamsHandling: 'merge'
+    });
   }
 }
