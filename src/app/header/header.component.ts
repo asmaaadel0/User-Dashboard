@@ -4,10 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrls: ['./header.component.css'],
   standalone: true,
   imports: [
     MatFormFieldModule,
@@ -22,6 +23,6 @@ export class HeaderComponent {
   value = '';
 
   onSearch() {
-    this.searchTerm.emit(this.value);
+    this.searchTerm.emit(this.value.trim());
   }
 }

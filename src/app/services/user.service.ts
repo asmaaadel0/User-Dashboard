@@ -13,13 +13,19 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(page: number): Observable<UserResponse> {
+  getUsers(page: number, id: string): Observable<UserResponse> {
+    console.log("id in service: ", id);
+    if (id != '') {
+      return this.http
+        .get<{ data: UserResponse }>(`${this.apiUrl}/${id}`)
+        .pipe(map((response) => response.data));
+    }
     return this.http.get<UserResponse>(`${this.apiUrl}?page=${page}`);
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<{ data: User }>(`${this.apiUrl}/${id}`).pipe(
-      map(response => response.data)
-    );
+    return this.http
+      .get<{ data: User }>(`${this.apiUrl}/${id}`)
+      .pipe(map((response) => response.data));
   }
 }

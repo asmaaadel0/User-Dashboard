@@ -1,12 +1,20 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
-import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
+
 export interface User {
   id: number;
   first_name: string;
@@ -51,15 +59,19 @@ export class UserListComponent implements OnInit {
 
   @Output() loadingChange = new EventEmitter<boolean>();
 
-  constructor(private userService: UserService, private router: Router,
-    private route: ActivatedRoute,) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes['searchTerm']", changes['searchTerm']);
+    if (changes['searchTerm']) {
+      this.page = 1;
+      this.loadUsers();
+    }
+  }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes["searchTerm"]) {
-  //     console.log("testtt");
-  //     this.loadUsers();
-  //   }
-  // }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.page = Number(this.route.snapshot.queryParamMap.get('page')) || 1;
@@ -73,7 +85,7 @@ export class UserListComponent implements OnInit {
       return;
     }
 
-    this.userService.getUsers(this.page).subscribe(
+    this.userService.getUsers(this.page, this.searchTerm).subscribe(
       (response) => {
         this.users = response.data;
         this.totalPages = response.total_pages;
@@ -88,10 +100,9 @@ export class UserListComponent implements OnInit {
   }
 
   loadMore() {
-    this.hasMorePages = false;
     if (this.totalPages === null || this.page >= this.totalPages) {
       console.log('No more pages to load.');
-      this.hasMorePages = true;
+      this.hasMorePages = false;
       return;
     }
     this.page++;
@@ -110,11 +121,12 @@ export class UserListComponent implements OnInit {
       queryParams: { page: this.page },
     });
   }
+
   updateUrl(): void {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { page: this.page },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
   }
 }
