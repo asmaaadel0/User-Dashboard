@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 export interface User {
   id: number;
@@ -29,9 +30,10 @@ export interface UserResponse {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   standalone: true,
-  imports: [CommonModule, MatListModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatListModule, MatButtonModule, MatIconModule, MatProgressBarModule],
 })
 export class UserListComponent implements OnInit {
+  @Input() searchTerm: string = '';
   users: User[] = [];
   page = 1;
   totalPages: number | null = null;
@@ -41,6 +43,13 @@ export class UserListComponent implements OnInit {
   @Output() loadingChange = new EventEmitter<boolean>();
 
   constructor(private userService: UserService) {}
+
+  // ngOnChanges(changes: SimpleChanges) {
+  //   if (changes["searchTerm"]) {
+  //     console.log("testtt");
+  //     this.loadUsers();
+  //   }
+  // }
 
   ngOnInit() {
     this.loadUsers();

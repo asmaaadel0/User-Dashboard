@@ -1,5 +1,4 @@
 
-<app-header></app-header>
-<app-progress-bar *ngIf="loading"></app-progress-bar>
-<app-user-list></app-user-list>
+<app-header (searchTerm)="onSearchTermChanged($event)"></app-header>
+<app-user-list [searchTerm]="searchTerm"></app-user-list>
 <router-outlet></router-outlet>

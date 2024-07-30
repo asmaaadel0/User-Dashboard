@@ -7,9 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'User-Dashboard';
-  loading = false;
+  searchTerm: string = '';
 
-  onLoadingChange(isLoading: boolean) {
-    this.loading = isLoading;
+
+  onSearchTermChanged(searchTerm: string) {
+    this.searchTerm = searchTerm;
   }
 }

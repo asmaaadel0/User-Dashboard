@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component , EventEmitter, Output} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
@@ -12,6 +12,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
 })
 export class HeaderComponent {
+  @Output() searchTerm = new EventEmitter<string>();
+  value = '';
 
-  value = 'Clear me';
+  onSearch() {
+    this.searchTerm.emit(this.value);
+  }
 }
