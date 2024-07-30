@@ -2,7 +2,7 @@
 ## 📝 Table of Contents
 
 - [Overview <a name = "Overview"></a>](#Overview-)
-- [Features and Functionality <a name = "Features"></a>](#Features-)
+- [Features and Functionality <a name = "featues"></a>](#featues-)
 - [Website Link <a name = "link"></a>](#link-)
 - [Screen Video from the Website <a name = "screen-video"></a>](#screen-video-)
 - [Project setup <a name = "project-setup"></a>](#project-setup-)
