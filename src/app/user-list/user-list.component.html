@@ -1,9 +1,12 @@
 <mat-list>
-  <div mat-subheader>Folders</div>
-  @for (folder of folders; track folder) {
-    <mat-list-item>
-      <mat-icon matListItemIcon>folder</mat-icon>
-      <div matListItemTitle>{{folder.name}}</div>
-    </mat-list-item>
-  }
+  <h3 mat-subheader>Users</h3>
+  <mat-divider></mat-divider>
+  <mat-list-item *ngFor="let user of users" (click)="viewDetails(user.id)">
+    <img [src]="user.avatar" alt="{{user.first_name}} {{user.last_name}}" class="user-avatar">
+    <div class="user-info">
+      <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+      <p>ID: {{ user.id }}</p>
+    </div>
+  </mat-list-item>
+  <button mat-raised-button (click)="loadMore()">Load More</button>
 </mat-list>

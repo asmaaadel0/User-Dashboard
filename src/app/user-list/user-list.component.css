@@ -1,3 +1,17 @@
-.mat-mdc-list-item-icon {
-  color: rgba(0, 0, 0, 0.54);
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-list-item {
+  cursor: pointer;
+  align-items: center;
+  padding: 10px 0;
 }

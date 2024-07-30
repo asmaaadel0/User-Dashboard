@@ -2,3 +2,36 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+/* Style for router-outlet */
+router-outlet + * {
+  display: block;
+  padding: 20px;
+}
+
+/* Style for app-header */
+app-header {
+  display: block;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Style for app-progress-bar */
+app-progress-bar {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Style for app-user-list */
+app-user-list {
+  display: block;
+  padding: 20px;
+}

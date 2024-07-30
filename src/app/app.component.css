@@ -1,0 +1,10 @@
+/* Custom hover and focus styles */
+.custom-input:hover {
+  background-color: #e8eaf6;
+}
+
+.custom-input:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+  outline: none;
+}
