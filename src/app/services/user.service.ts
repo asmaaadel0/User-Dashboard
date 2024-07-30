@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../user-list/user-list.component';
 import { UserResponse } from '../user-list/user-list.component';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,8 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`https://reqres.in/api/users/${id}`);
+    return this.http.get<{ data: User }>(`${this.apiUrl}/${id}`).pipe(
+      map(response => response.data)
+    );
   }
 }

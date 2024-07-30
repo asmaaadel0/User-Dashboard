@@ -1,3 +1,5 @@
+
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <mat-card *ngIf="user" class="user-detail-card">
   <mat-card-header>
     <mat-card-title>{{ user.first_name }} {{ user.last_name }}</mat-card-title>
@@ -5,7 +7,6 @@
   </mat-card-header>
   <mat-card-content>
     <img 
-      *ngIf="user.avatar"
       [src]="user.avatar"
       alt="{{ user.first_name }} {{ user.last_name }}"
       class="user-avatar-detail" 
@@ -13,4 +14,3 @@
     <p>Email: {{ user.email }}</p>
   </mat-card-content>
 </mat-card>
-# <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>

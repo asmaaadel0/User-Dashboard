@@ -23,7 +23,7 @@ export class UserDetailsComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
       this.userService.getUserById(Number(userId)).subscribe(
-        user => {
+        (user: User) => {
           this.user = user;
           this.loading = false;
         },
@@ -32,6 +32,8 @@ export class UserDetailsComponent implements OnInit {
           this.loading = false;
         }
       );
+    } else {
+      this.loading = false;
     }
   }
 }
