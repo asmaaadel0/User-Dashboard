@@ -2,6 +2,13 @@
   <h1>User Dashboard</h1>
   <mat-form-field>
     <mat-label>Search by ID</mat-label>
-    <input matInput [(ngModel)]="value" (ngModelChange)="onSearch()" placeholder="Search" />
+    <input 
+      matInput 
+      type="number" 
+      [(ngModel)]="value" 
+      (ngModelChange)="onSearch()" 
+      placeholder="Search" 
+      min="0" 
+    />
   </mat-form-field>
 </header>

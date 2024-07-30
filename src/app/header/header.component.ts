@@ -23,6 +23,6 @@ export class HeaderComponent {
   value = '';
 
   onSearch() {
-    this.searchTerm.emit(this.value.trim());
+    this.searchTerm.emit(this.value);
   }
 }
