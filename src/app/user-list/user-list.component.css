@@ -1,27 +1,55 @@
+.user-list {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer !important;
+  transition: background-color 0.3s;
+  overflow: visible;
+}
+
+.user-item:hover {
+  background-color: #f5f5f5;
+}
+
 .user-avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 20px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .user-info {
-  display: flex;
-  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
-.mat-list-item {
-  cursor: pointer;
-  align-items: center;
-  padding: 10px 0;
+.user-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #757575;
 }
 
 .pagination-controls {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .pagination-controls button {
-  margin: 5px;
+  min-width: 120px;
 }

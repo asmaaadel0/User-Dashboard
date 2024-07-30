@@ -1,7 +1,11 @@
-<mat-list>
+<mat-list class="user-list">
   <h3 mat-subheader>Users</h3>
   <mat-divider></mat-divider>
-  <mat-list-item *ngFor="let user of users" (click)="viewDetails(user.id)">
+  <mat-list-item
+    *ngFor="let user of users"
+    (click)="viewDetails(user.id)"
+    class="user-item"
+  >
     <img
       [src]="user.avatar"
       alt="{{ user.first_name }} {{ user.last_name }}"
@@ -9,14 +13,23 @@
     />
     <div class="user-info">
       <h4>{{ user.first_name }} {{ user.last_name }}</h4>
-      <p>ID: {{ user.id }}</p>
     </div>
   </mat-list-item>
   <div class="pagination-controls">
-    <button *ngIf="page > 1" mat-raised-button (click)="loadPrevious()">
+    <button
+      *ngIf="page > 1"
+      mat-raised-button
+      color="primary"
+      (click)="loadPrevious()"
+    >
       <mat-icon>arrow_back</mat-icon> Back
     </button>
-    <button *ngIf="hasMorePages" mat-raised-button (click)="loadMore()">
+    <button
+      *ngIf="hasMorePages"
+      mat-raised-button
+      color="primary"
+      (click)="loadMore()"
+    >
       Load More <mat-icon>arrow_forward</mat-icon>
     </button>
   </div>
