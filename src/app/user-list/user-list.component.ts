@@ -1,19 +1,14 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { CommonModule } from '@angular/common';
+import { switchMap, Subscription, Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 export interface User {
   id: number;
@@ -49,23 +44,14 @@ export interface UserResponse {
     MatGridListModule,
   ],
 })
-export class UserListComponent implements OnInit {
-  @Input() searchTerm: string = '';
+export class UserListComponent implements OnInit, OnDestroy {
+  @Input() searchTerm: number = 0;
   users: User[] = [];
   page = 1;
   totalPages: number | null = null;
   loading = false;
   hasMorePages = false;
-
-  @Output() loadingChange = new EventEmitter<boolean>();
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("changes['searchTerm']", changes['searchTerm']);
-    if (changes['searchTerm']) {
-      this.page = 1;
-      this.loadUsers();
-    }
-  }
+  private routeSub: Subscription | null = null;
 
   constructor(
     private userService: UserService,
@@ -74,31 +60,70 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.page = Number(this.route.snapshot.queryParamMap.get('page')) || 1;
-    this.loadUsers();
+    this.routeSub = this.route.queryParams
+      .pipe(
+        switchMap(params => {
+          this.searchTerm = params['search'] || '';
+          this.page = Number(params['page']) || 1;
+          return this.loadUsers(); // Return the observable
+        }),
+        catchError(error => {
+          console.error('Error loading users:', error);
+          return of(); // Return an empty observable in case of error
+        })
+      )
+      .subscribe();
   }
 
-  loadUsers() {
+  ngOnDestroy() {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
+  }
+
+  loadUsers(): Observable<UserResponse> {
     this.loading = true;
+
     if (this.totalPages !== null && this.page > this.totalPages) {
       this.hasMorePages = false;
-      return;
+      this.loading = false;
+      return of({
+        page: 1,
+        per_page: 0,
+        total: 0,
+        total_pages: 0,
+        data: [],
+        support: {
+          url: '',
+          text: '',
+        },
+      } as UserResponse);
     }
 
-    this.userService.getUsers(this.page, this.searchTerm).subscribe(
-      (response) => {
+    return this.userService.getUsers(this.page, this.searchTerm).pipe(
+      tap(response => {
         this.users = response.data;
         this.totalPages = response.total_pages;
         this.hasMorePages = this.page < this.totalPages;
         this.loading = false;
-      },
-      (error) => {
+      }),
+      catchError(error => {
         console.error('Error fetching users:', error);
         this.loading = false;
-      }
+        return of({
+          page: 1,
+          per_page: 0,
+          total: 0,
+          total_pages: 0,
+          data: [],
+          support: {
+            url: '',
+            text: '',
+          },
+        } as UserResponse);
+      })
     );
   }
-
   loadMore() {
     if (this.totalPages === null || this.page >= this.totalPages) {
       console.log('No more pages to load.');

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'User-Dashboard';
   searchTerm: string = '';
+  constructor(private router: Router) {}
 
-  onSearchTermChanged(searchTerm: string) {
-    this.searchTerm = searchTerm;
+  onSearchTermChanged(term: string) {
+    this.searchTerm = term;
+    this.router.navigate([], {
+      queryParams: { search: this.searchTerm },
+      queryParamsHandling: 'merge'
+    });
   }
 }
