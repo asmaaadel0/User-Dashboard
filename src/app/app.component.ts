@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'User-Dashboard';
+  loading = false;
+
+  onLoadingChange(isLoading: boolean) {
+    this.loading = isLoading;
+  }
 }

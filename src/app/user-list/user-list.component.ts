@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
@@ -38,6 +38,8 @@ export class UserListComponent implements OnInit {
   loading = false;
   hasMorePages = false;
 
+  @Output() loadingChange = new EventEmitter<boolean>();
+
   constructor(private userService: UserService) {}
 
   ngOnInit() {
@@ -45,12 +47,12 @@ export class UserListComponent implements OnInit {
   }
 
   loadUsers() {
+    this.loading = true;
     if (this.totalPages !== null && this.page > this.totalPages) {
       this.hasMorePages = false;
       return;
     }
 
-    this.loading = true;
     this.userService.getUsers(this.page).subscribe(
       response => {
         this.users = response.data;
@@ -70,7 +72,7 @@ export class UserListComponent implements OnInit {
     if (this.totalPages === null || this.page >= this.totalPages) {
       console.log('No more pages to load.');
       this.hasMorePages = true;
-      return; // Prevent loading more if no pages are left
+      return;
     }
     
     this.page++;
