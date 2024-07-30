@@ -2,7 +2,7 @@
 ## 📝 Table of Contents
 
 - [About <a name = "Overview"></a>](#Overview-)
-- [Features <a name = "Features"></a>](#Features-)
+- [Features and Functionality <a name = "Features"></a>](#Features-)
 - [Website Link <a name = "link"></a>](#link-)
 - [Screen Video from the Website <a name = "screen-video"></a>](#screen-video-)
 - [Project setup <a name = "project-setup"></a>](#project-setup-)
@@ -11,7 +11,7 @@
 ## Overview <a name = "Overview"></a>
 The User Dashboard application is an Angular-based web application that displays user information and allows for searching and viewing user details. The application utilizes Angular Material for UI components and includes features like pagination, search functionality, and user detail view. Caching mechanisms are implemented to optimize performance by reducing redundant HTTP requests.
 
-## Features and Functionality <a name = "featues-functionalities"></a>
+## Features and Functionality <a name = "featues"></a>
 ### Header:
 - Search by ID: Use the input field to search for users by their ID.
 ### User List:
