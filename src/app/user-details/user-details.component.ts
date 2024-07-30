@@ -5,19 +5,26 @@ import { User } from '../user-list/user-list.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css',
   standalone: true,
-  imports: [MatProgressBarModule, CommonModule, MatCardModule],
+  imports: [MatProgressBarModule, CommonModule, MatCardModule, MatIconModule, MatButtonModule],
 })
 export class UserDetailsComponent implements OnInit {
   user: User | undefined;
   loading = true;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('id');
@@ -27,7 +34,7 @@ export class UserDetailsComponent implements OnInit {
           this.user = user;
           this.loading = false;
         },
-        error => {
+        (error) => {
           console.error('Error fetching user details:', error);
           this.loading = false;
         }
@@ -35,5 +42,8 @@ export class UserDetailsComponent implements OnInit {
     } else {
       this.loading = false;
     }
+  }
+  goBack() {
+    this.location.back();
   }
 }

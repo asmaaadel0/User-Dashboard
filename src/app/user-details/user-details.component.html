@@ -1,4 +1,3 @@
-
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <mat-card *ngIf="user" class="user-detail-card">
   <mat-card-header>
@@ -6,11 +5,18 @@
     <mat-card-subtitle>ID: {{ user.id }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <img 
+    <img
       [src]="user.avatar"
       alt="{{ user.first_name }} {{ user.last_name }}"
-      class="user-avatar-detail" 
+      class="user-avatar-detail"
     />
     <p>Email: {{ user.email }}</p>
   </mat-card-content>
+
+    <div class="pagination-controls">
+      <button mat-raised-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Go Back
+      </button>
+    </div>
 </mat-card>

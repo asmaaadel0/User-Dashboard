@@ -34,3 +34,10 @@
 .mat-progress-bar {
   margin: 20px 0;
 }
+.pagination-controls {
+  margin-top: 20px;
+}
+
+.pagination-controls button {
+  min-width: 120px;
+}
