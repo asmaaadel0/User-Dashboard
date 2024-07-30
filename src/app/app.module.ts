@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,10 +13,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserDetailsComponent,
-  ],
+  declarations: [AppComponent, UserDetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,10 +21,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     UserListComponent,
     HttpClientModule,
   ],
-  providers: [
-    provideClientHydration(),
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration(), provideAnimationsAsync()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

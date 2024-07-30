@@ -1,11 +1,18 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges  } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 export interface User {
   id: number;
   first_name: string;
@@ -30,7 +37,13 @@ export interface UserResponse {
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   standalone: true,
-  imports: [CommonModule, MatListModule, MatButtonModule, MatIconModule, MatProgressBarModule],
+  imports: [
+    CommonModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule,
+  ],
 })
 export class UserListComponent implements OnInit {
   @Input() searchTerm: string = '';
@@ -63,13 +76,13 @@ export class UserListComponent implements OnInit {
     }
 
     this.userService.getUsers(this.page).subscribe(
-      response => {
+      (response) => {
         this.users = response.data;
         this.totalPages = response.total_pages;
         this.hasMorePages = this.page < this.totalPages;
         this.loading = false;
       },
-      error => {
+      (error) => {
         console.error('Error fetching users:', error);
         this.loading = false;
       }
@@ -83,7 +96,7 @@ export class UserListComponent implements OnInit {
       this.hasMorePages = true;
       return;
     }
-    
+
     this.page++;
     this.loadUsers();
   }

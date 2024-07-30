@@ -4,9 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from '../user-list/user-list.component';
 import { UserResponse } from '../user-list/user-list.component';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   private apiUrl = 'https://reqres.in/api/users';
