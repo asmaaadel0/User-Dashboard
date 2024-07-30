@@ -1,17 +1,17 @@
 # User Dashboard Application
 ## 📝 Table of Contents
 
-- [About <a name = "Overview"></a>](#Overview-)
-- [Features <a name = "Features"></a>](#Features-)
-- [Website Link <a name = "link"></a>](#link-)
-- [Screen Video from the Website <a name = "screen-video"></a>](#screen-video-)
-- [Project setup <a name = "project-setup"></a>](#project-setup-)
+- [Overview <a name = "Overview"></a>](#Overview-)
+- [Features and Functionality <a name = "Features-and-Functionality"></a>](#Features-and-Functionality-)
+- [Website Link <a name = "Website-Link"></a>](#Website-Link-)
+- [Screen Video <a name = "Screen-Video"></a>](#Screen-Video-)
+- [Project Setup <a name = "Project-Setup"></a>](#Project-Setup-)
 - [Contributing <a name = "Contributing"></a>](#Contributing-)
 
 ## Overview <a name = "Overview"></a>
 The User Dashboard application is an Angular-based web application that displays user information and allows for searching and viewing user details. The application utilizes Angular Material for UI components and includes features like pagination, search functionality, and user detail view. Caching mechanisms are implemented to optimize performance by reducing redundant HTTP requests.
 
-## Features and Functionality <a name = "featues-functionalities"></a>
+## Features and Functionality <a name = "Features-and-Functionality"></a>
 ### Header:
 - Search by ID: Use the input field to search for users by their ID.
 ### User List:
@@ -33,12 +33,15 @@ The User Dashboard application is an Angular-based web application that displays
 - src/app/user-detail/user-detail.component.html: Template for the user detail view.
 - src/app/user-detail/user-detail.component.css: Styles for the user detail view.
 
-## Website Link: <a name = "link"></a>
+## Website Link: <a name = "Website-Link"></a>
 https://user-dashboard-sigma-one.vercel.app/
 
-## Screen Video from the Website: <a name = "screen-video"></a>
+## Screen Video from the Website: <a name = "Screen-Video"></a>
 
-## Project setup <a name = "project-setup"></a>
+https://github.com/user-attachments/assets/a4278b3d-6212-45f9-8be3-5d4f8607f688
+
+
+## Project Setup <a name = "Project-Setup"></a>
 ### Prerequisites
 - Node.js (v14 or later)
 - Angular CLI
