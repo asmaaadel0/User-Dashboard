@@ -16,7 +16,7 @@ export class UserService {
     return this.http.get<UserResponse>(`${this.apiUrl}?page=${page}`);
   }
 
-  getUserById(id: number): Observable<{ data: User }> {
-    return this.http.get<{ data: User }>(`${this.apiUrl}/${id}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`https://reqres.in/api/users/${id}`);
   }
 }

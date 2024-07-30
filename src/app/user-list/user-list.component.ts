@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Input,
 } from '@angular/core';
+import { Router } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { UserService } from '../services/user.service';
@@ -17,6 +18,7 @@ export interface User {
   first_name: string;
   last_name: string;
   avatar: string;
+  email: string;
 }
 
 export interface UserResponse {
@@ -55,7 +57,7 @@ export class UserListComponent implements OnInit {
 
   @Output() loadingChange = new EventEmitter<boolean>();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   // ngOnChanges(changes: SimpleChanges) {
   //   if (changes["searchTerm"]) {
@@ -109,6 +111,6 @@ export class UserListComponent implements OnInit {
   }
 
   viewDetails(userId: number) {
-    // Implement navigation to user details page
+    this.router.navigate(['/users', userId]);
   }
 }
